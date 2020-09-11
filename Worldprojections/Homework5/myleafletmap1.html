@@ -1,0 +1,80 @@
+<html>
+ <head>
+ <title>My First Leaflet Map</title>
+ 
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+ integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+ crossorigin=""/>
+
+ <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+ integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+ crossorigin=""></script>
+<script src = "./data/old_well_4326.geojson"></script>
+<script src ="./data/bell_tower_4326.geojson"></script>
+<script src = "./data/everette_residencehall_4326.geojson"></script>
+class(L.tileLayer)
+ </head>
+ <body>
+     <div id="mapid"></div>
+     <style>
+        #mapid{ width: 900px; height: 500px; }
+     </style>
+       
+}
+<script> 
+ var map = L.map('mapid').setView([35.911497, -79.047459], 16);
+
+ L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+}).addTo(map);
+
+L.marker([35.911271, -79.049807]).addTo(map)
+ .bindPopup('Carolina Hall')
+ .openPopup();
+
+ L.marker([35.910608, -79.048797]).addTo(map)
+ .bindPopup('Lenoir Dinning Hall')
+ .openPopup();
+
+ L.marker([35.913703, -79.048917]).addTo(map)
+ .bindPopup('Coker Arboretum')
+ .openPopup();
+
+var uncIcon = L.icon({
+    iconUrl: 'https://www.cs.unc.edu/xcms/wpfiles/resources/OldwellRevers.jpg',
+    iconSize:[50,50],
+    popupAnchor:[0,0]
+});
+var customPopup = "Trinity getting her 4.0 season sip Freshman year<br/><img src='https://lh3.googleusercontent.com/Lj--5Jm-7msxG-O0bGwB3SU4mEFjKRXETGfQHemVePs-hQ9nim1llN_KTRZZax2qUyc556dwyUiVNXGRDNzWfOX2v1_nTQNzydx8gj_9iFIyva4CcEjobo9xCN5RPWkhRYkAG6S5VQYKQ0qhPrjKDSjNPvQU0JG_TcBXWkYU6b7h0ofIitZ6IfYS0th6o-mmZyp6C4z5e7JFLKcpiWnldyOlH3sNR8HU5r0cfHFsrANiA7LzhYHekTRYBg1bCyDlqRkzNk1YI6WqIDPATUKORapNejoZJtGug36yyIKfNBtPbAPhvpTh2zRvCqWh12m3QDG7NrfWnw0KLZmGMdz-GaVngrl2NdDipM-1WdVEggZw_tJMCSSLU_yB-aY-EN174ETDeaShm_4TQlwAA8LIpHeT7kQVAvrlZKP0D8b5SrrJX--BuZzGRf7Pq9ldT7BUZN9FqjHhrlw4NcRK7le4g_bnGCs7ZnCk-wQycishmV5-BiDViPz7L6N1Yp0Ykv1K3B2lm4BGQr8bJJoSZuRTYEjqK-K-DbEulPVhkypa4hJk7fzz7nx9WDd_pMZbDTHQjQ1Qu9H6TzwEpWxJWrA49AkckRsEcia_gunAV237cZqFUy8hZm3tihKJVGw4HLUC-O4p13GzBcmGuljE50P4LvD1h_YI6STrvvNoc33r5tRwg9AWB1waamFPbkXACm4=w585-h779-no?authuser=0'width='100px'/>";
+L.geoJSON(uncwell, { // a
+ pointToLayer: function (feature, latlng) { // b
+ return L.marker(latlng, {icon: uncIcon});}}) // c
+ .bindPopup(customPopup) // d
+ .addTo(map); //
+
+var everetteIcon = L.icon({
+    iconUrl: 'https://lh3.googleusercontent.com/a2A9POX6LkGV-hiafp5vYAG4rsH6ePmUnnrIPc6tNlRfj7WbVifcX9J6w5TR2fcS5vNmfbJrkHKQZ5Pgqp_7Z2ucq5lQxnmwh3PdX-uifdQqcIMpmtyHP6vlk9Lrl7bd_PxaZj61Dwf6xvLL-k9JCj-6cHa9e4bapkYX2x72DDS8evIbkMr_BJeRdI_IhmKqYpRTmdHzM7kNXxagAwYbFiwveHHl7Qz4KFz0IhNidjtGMuaaJ1g1LTPclGxo1_zFWiI2K9EsyhEyp35xA_mUURoG3AdGAYpiZMt8nAyHdOcTCwhVThYvly59PxBL9SjKySGbLV_E3oM6tgSDIyuTxIcYqQrFTiMfFAXZzDBl2DKukQUloqj958O-lx9BISALvI5kQuQzGWKgo_6nIASUkuFpLaZBsCA8OtBgmikIO9xoGJ64kMIoG-RipnLpdIihi33q48sZXmYhM82-Edb3HqGQiv-A7mZJIsGUpILCoeEC6me60WPcChS07ySX_WuRXzM5u0GpS4y5Q3fG12VsZnHY05kC23_KEieKksCckP-STk9nh-iffYNnowXnrHFYFpp9Tw6Pd8UQphN2eytETnmLMxu5VReSz9XrqPrqOTktQ-1O_syNpq0HFK5W7leICmvhbWZA8nfdL9c8yOOcijhhXRSW8YO45YaTMs1p5gppHX7xzHLXKVKQ7Hndiw8=w959-h641-no?authuser=0',
+    iconSize:[50,50],
+    popupAnchor:[0,0]
+});
+var customPopup = "Residence of Everette year 2018<br/><img src='https://lh3.googleusercontent.com/9-3EP61qleC-ByR-KBKdsV6TAjU0D8uWoCg-A-xTTRgu2XOuDhSm1qaFetkXOYwlPUVJpyx4M52-bH-09Y20svBkkOg8dxH8ynd4c9fnxQ92iLHgj2oYbnz6hLvE9BmD1UxS1sZxBF-JfK15qV8kd5773HCMb-Aa0c4j069CaXzjZtWFW3g9BNmgG_yYiUCgmPOn1fp0IsRHH3HEZo8rJq4IZNsACfYZH-gSWvzudReuZR5-L6zAHSfyILtJWSka1qQM7EDmZ0z6KxOluSAmHfyZRKfYR9Dc9FAvit21Ie3JaDpBQWkAhigddYGafoe6KivwCAXczwEGnk79HUOobO9rXrOWSbftfQn25xFu15Pn7qQRGdE6r4vcMMfGeQMF9egTTGJ2-bqI0waVrL_rQTV553s6aUbOKQgR96v7x9OEsLTZhoEo4wKlKzbj02Qsi6xSw6tiNcXDZuEHX4gstw4ZJhk3Mv6Crddhft4JyyakkS7n_sXM_ld_uOjfSUfqYcrqaaQC3EfyiK6CO5JgTv-JZtPm7gwAAKP0JWPul_oey_ll1SFF9Xik0qBwS7QNOP_16qmG_TGgp1hbRHHtzpmOKemonL2KvhIZaTtCMurRGFWEAiWwhzrHBRu9tA4Rq43ZVcNWnmNIMt_WSpVu5DqHmxj7eGGGATkwoCI0PLDH9EAcJ3-YURoh8CqadmI=w585-h779-no?authuser=0'width='100px'/>";
+L.geoJSON(halleverette, {
+ pointToLayer: function (feature, latlng) { // b
+ return L.marker(latlng, {icon: everetteIcon});}}) // c
+ .bindPopup(customPopup) // d
+ .addTo(map);
+
+ var towerIcon = L.icon({
+    iconUrl: 'https://i.pinimg.com/originals/c1/c7/83/c1c783a023f28107fa8087082b8607d3.jpg',
+    iconSize:[50,50],
+    popupAnchor:[0,0]
+});
+var customPopup = "Trinity enjoying the weather at bell Tower<br/><img src='https://lh3.googleusercontent.com/WL5hOfnxBkq7vkNMewJlp6UYglDQJdQFZkUg18__33rL8FIihJAd1AVKrmjdJWICU5xHvsj7L0bjyPNFl9Tkg_66XmS6OnOuGHStNtMwFSPdRIffIsyyjIhpTy4nzcsvYXtVCI4uL-zaYaMGJX0yEpXmLFmW5lUMZIQy_YglTsWyaJixr3-OQKup64DiQQqmWUpDXKlZyBoOPIV5Q3GTVJHTsI1Ywj82bhTFOJScLjxtNzyTQ-c0BYTz1xne9w50CGH6WLZDdcjei1qxUp8m1vxzt43fWiaOXIorE1mv0ZxRlIdgMqtbYQFq51fDHYEsA8hD2Pp-_cznMJ-xGTRLcN_5U834-S7kEvZKnhYEKKH1CBLCBnNEYehNwku_ZrKdwDreAwORJCFJ7L2-6D9iI1axKoVoRLwA15wy6S_0mcTBl4WPELmF-3xp7FN-2mKOf3SFMq-yquxKz4WykB__nXrcHeR7L1fFYWg9urUzNH00feCFwowTk8JhbcBucwE-G5p-UwBvl0FFTP4iIPtfIBRsdcimNSU7kQqxEjxHuhqUA9na0deuewfAEdbiAckdUu8mUVmTk4FUAyyLd9t8a963vXT1vYziu1otdlXOGXQfWnAmxGNejHne3TU4xwuvWzFrr4BB33vGlTuG8HSYw7Gr9uMIvciBsxGlQ4w3YIARppJumaaEreW7RPSWXGg=w639-h852-no?authuser=0'width='100px'/>";
+L.geoJSON(towerbell, {
+ pointToLayer: function (feature, latlng) { // b
+ return L.marker(latlng, {icon: towerIcon});}}) // c
+ .bindPopup(customPopup) // d
+ .addTo(map);
+</script>
+
+ </body>
+</html>
